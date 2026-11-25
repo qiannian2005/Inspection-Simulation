@@ -1,0 +1,18 @@
+<Project>
+  <PropertyGroup>
+    <HalconDotNetDll Condition="'$(HalconDotNetDll)' == '' and '$(HALCONROOT)' != ''">$(HALCONROOT)\bin\dotnet35\halcondotnet.dll</HalconDotNetDll>
+    <CameraSdkDll Condition="'$(CameraSdkDll)' == '' and '$(MVS_DOTNET_DLL)' != ''">$(MVS_DOTNET_DLL)</CameraSdkDll>
+    <CameraSdkDll Condition="'$(CameraSdkDll)' == '' and Exists('$(MSBuildProgramFiles32)\MVS\Development\DotNet\win64\net40\MvCameraControl.Net.dll')">$(MSBuildProgramFiles32)\MVS\Development\DotNet\win64\net40\MvCameraControl.Net.dll</CameraSdkDll>
+    <CameraSdkDll Condition="'$(CameraSdkDll)' == '' and Exists('$(MSBuildProgramFiles32)\MVS\Development\DotNet\MvCameraControl.Net.dll')">$(MSBuildProgramFiles32)\MVS\Development\DotNet\MvCameraControl.Net.dll</CameraSdkDll>
+  </PropertyGroup>
+  <Target Name="ResolveVisionSdkPaths" BeforeTargets="ResolveAssemblyReferences">
+    <ItemGroup>
+      <Reference Condition="'%(Reference.Identity)' == 'halcondotnet' and Exists('$(HalconDotNetDll)')">
+        <HintPath>$(HalconDotNetDll)</HintPath>
+      </Reference>
+      <Reference Condition="'%(Reference.Identity)' == 'MvCameraControl.Net' and Exists('$(CameraSdkDll)')">
+        <HintPath>$(CameraSdkDll)</HintPath>
+      </Reference>
+    </ItemGroup>
+  </Target>
+</Project>

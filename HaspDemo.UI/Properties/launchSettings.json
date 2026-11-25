@@ -1,0 +1,12 @@
+{
+  "profiles": {
+    "Simulation": {
+      "commandName": "Project",
+      "commandLineArgs": "--simulate"
+    },
+    "Hardware": {
+      "commandName": "Project",
+      "commandLineArgs": ""
+    }
+  }
+}
